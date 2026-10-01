@@ -24,7 +24,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
     Company, Platform,
     models::{
-        id_or_object::{FromId, deserialize_id_or_object_vec},
+        id_or_object::{FromId, deserialize_id_or_object_vec, deserialize_id_or_object},
         imagery::GameEngineLogo,
         timestamp::format_timestamp,
     },
@@ -53,7 +53,7 @@ pub struct GameEngine {
     pub description: Option<String>,
 
     /// Logo of the game engine.
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_id_or_object")]
     pub logo: Option<GameEngineLogo>,
 
     /// Name of the game engine.
